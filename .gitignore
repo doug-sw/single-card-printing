@@ -1,11 +1,5 @@
 __pycache__/
 *.py[cod]
-*.png
-*.jpg
-*.jpeg
-*.bmp
-*.tif
-*.tiff
 *.tmp
 *.log
 .venv/
