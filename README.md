@@ -1,35 +1,35 @@
 # Print Compensation
 
-This script compensates for a print transform by applying a fixed inner-bleed crop, optional offset translation, and a rotation around the crop center.
+This script prepares a source image for printing by cropping to the fixed inner bleed area, shifting the artwork in millimeters, and rotating it around the center of the crop.
 
-## What this script does
+The result is intended to be placed into PrintFab Composer as the final artwork for a single-card print job.
 
-This script compensates a source image for a print transform by applying a fixed inner-bleed crop, a translation in millimeters, and a rotation around the crop center.
+## Quick start
 
-The output is intended to be placed into PrintFab Composer as the final artwork for a single-card print job.
-
-## Example usage
+Use the script like this:
 
 ```powershell
 python .\print_compensation.py \
   --source "C:\path\to\input.jpg" \
   --output "C:\path\to\output.png" \
-  --offset-x -0.225 \
-  --offset-y 0 \
-  --bleed-mm 1.6 \
+  --offset_x -0.225 \
+  --offset_y 0 \
+  --bleed_mm 1.6 \
   --rotation 0.35 \
   --dpi 300
 ```
+
+This is the common starting point for the current workflow.
 
 ## Parameter reference
 
 - `--source`: input image path
 - `--output`: output image path
-- `--offset-x`: horizontal offset in millimeters, converted to pixels using DPI
-- `--offset-y`: vertical offset in millimeters, converted to pixels using DPI
-- `--bleed-mm`: bleed on each side in millimeters
+- `--offset_x`: horizontal shift in millimeters. Negative moves the image left; positive moves it right.
+- `--offset_y`: vertical shift in millimeters. Negative moves the image up; positive moves it down.
+- `--bleed_mm`: bleed on each side in millimeters
 - `--rotation`: rotation in degrees in image coordinates. Positive values appear counterclockwise in the displayed image because Y points downward.
-- `--dpi`: optional DPI override. If omitted, the script tries to infer DPI from the image size
+- `--dpi`: optional DPI override. If omitted, the script tries to infer DPI from the image size.
 
 ## DPI detection
 
@@ -37,10 +37,12 @@ If `--dpi` is not provided, the script estimates DPI from the image size using t
 
 ## Tuning the transform
 
-- If the image looks too heavy on the left, reduce `--offset-x`.
-- If it looks too heavy on the right, increase `--offset-x`.
-- If it looks too heavy on the top, reduce `--offset-y`.
-- If it looks too heavy on the bottom, increase `--offset-y`.
+Start with the defaults above, then adjust from there:
+
+- If the image looks too heavy on the left, reduce `--offset_x`.
+- If it looks too heavy on the right, increase `--offset_x`.
+- If it looks too heavy on the top, reduce `--offset_y`.
+- If it looks too heavy on the bottom, increase `--offset_y`.
 - If it needs to rotate counterclockwise, increase `--rotation`.
 - If it needs to rotate clockwise, decrease `--rotation`.
 
