@@ -16,7 +16,7 @@ python .\print_compensation.py \
   --offset_y 0 \
   --bleed_mm 1.6 \
   --rotation 0.35 \
-  --dpi 300
+  --dpi 1200
 ```
 
 This is the common starting point for the current workflow.
